@@ -17,10 +17,9 @@ def main() -> None:
         for index in range(len(args)):
             if args[index] == "-d":
                 for directory in args[index + 1:]:
-                    if not directory.startswith("-"):
-                        directories.append(directory)
-                    else:
+                    if directory.startswith("-"):
                         break
+                    directories.append(directory)
     if directories:
         full_path = os.path.join(full_path, *directories)
         os.makedirs(full_path, exist_ok=True)
