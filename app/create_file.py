@@ -28,14 +28,17 @@ def main() -> None:
     if args[1] == "-f":
         file_name = args[2]
     else:
-       for index in range(len(args)):
-           if args[index] == "-f":
-               file_name = args[index+1]
-               break
+        for index in range(len(args)):
+            if args[index] == "-f":
+                file_name = args[index + 1]
+                break
+    if not file_name:
+        return
     file_path = os.path.join(full_path, file_name)
     file_exists = os.path.exists(file_path)
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open(file_path, "a" if file_exists else "w") as file:
-        file.write("\n" + datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n")
+        file.write(("\n" if file_exists else "") + timestamp + "\n")
         line_counter = 1
         while True:
             new_line = input("Enter content line: ")
@@ -43,5 +46,6 @@ def main() -> None:
                 break
             file.write(str(line_counter) + " " + new_line + "\n")
             line_counter += 1
+
 
 main()
