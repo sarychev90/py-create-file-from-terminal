@@ -10,10 +10,9 @@ def main() -> None:
     directories = []
     if args[1] == "-d":
         for directory in args[2:]:
-            if not directory.startswith("-"):
-                directories.append(directory)
-            else:
+            if directory.startswith("-"):
                 break
+            directories.append(directory)
     else:
         for index in range(len(args)):
             if args[index] == "-d":
